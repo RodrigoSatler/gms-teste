@@ -6,6 +6,10 @@ describe('US-00: Funcinalidade:busca de filmes', () => {
         cy.visit('/')
     });
 
+    afterEach(() => {
+        cy.screenshot()
+    });
+
     it('Deve buscar filmes com sucesso', () => {
         cy.get('#search-input').type('Matrix')
         cy.get('#search-button').click()
@@ -22,7 +26,7 @@ describe('US-00: Funcinalidade:busca de filmes', () => {
     it('Deve buscar filmes com sucesso da lista inteira', () => {
         cy.fixture('filmes').each((filmes) => {
             cy.get('#search-input').clear().type(filmes.titulo)
-            cy.get('#search-button').click({force:true})
+            cy.get('#search-button').click({ force: true })
             cy.get('#results-section').should('contain', filmes.titulo)
         })
 
